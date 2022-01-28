@@ -1,0 +1,43 @@
+<div class="card">
+    <h1>{{title}}</h1>
+    <form [formGroup]="formUsuario">
+        <div class="formgrid grid">
+            <div class="field col-6 sm:col-12 md:col-6">
+                <label for="usuario">Usuario</label>
+                <input id="usuario" type="text" pInputText class="inputfield w-full" formControlName="usuario">
+                <small id="username2-help" class="p-error" *ngIf="campoValido('usuario')">{{getErrorMsg('usuario')}}</small>
+            </div>
+            <div class="field col-6 sm:col-12 md:col-6">
+                <label for="nombre">Nombre</label>
+                <input id="nombre" type="text" pInputText class="inputfield w-full"  formControlName="nombre">
+                <small id="username2-help" class="p-error" *ngIf="campoValido('nombre')">{{getErrorMsg('nombre')}}</small>
+            </div>
+        </div>
+        <div class="formgrid grid">
+            <div class="field col-6 sm:col-12 md:col-6">
+                <label for="apellido">Apellido</label>
+                <input id="apellido" type="text" pInputText class="inputfield w-full" formControlName="apellido">
+                <small id="username2-help" class="p-error" *ngIf="campoValido('apellido')">{{getErrorMsg('apellido')}}</small>
+            </div>
+            <div class="field col-6 sm:col-12 md:col-6">
+                <label for="correo">Correo</label>
+                <input id="correo" type="text" pInputText class="inputfield w-full"  formControlName="correo">
+                <small id="username2-help" class="p-error" *ngIf="campoValido('correo')">{{getErrorMsg('correo')}}</small>
+            </div>
+        </div>
+        <div class="flex justify-content-end align-content-center">
+            <div>
+                <button pButton type="button" label="Volver" class="p-button-warning mr-3" (click)="goback()" [disabled]="loading"></button> 
+            </div>
+            <div *ngIf="formUsuario.value._id">
+                <button pButton type="button" label="Eliminar" class="p-button-danger" (click)="deleteUser()" [loading]="loading"></button> 
+            </div>
+            <div *ngIf="!formUsuario.value._id">
+                <button pButton type="button" label="Limpiar" class="p-button-danger mr-3" (click)="clearForm()" [disabled]="loading"></button> 
+            </div>
+            <div *ngIf="!formUsuario.value._id">
+                <button pButton type="button" label="Guardar" class="p-button-info" (click)="save()" [loading]="loading"></button>   
+            </div>
+        </div>
+    </form>
+</div>

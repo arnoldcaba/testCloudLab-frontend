@@ -1,1 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Oxygen&display=swap');
+
+.container {
+  max-width: 1060px;
+  margin: 0 auto;
+  font-family: "Oxygen", Arial, Helvetica, sans-serif;
+  font-size: 20px;
+}
