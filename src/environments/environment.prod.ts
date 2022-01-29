@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: 'http://localhost:8090/api/'
+  baseUrl: 'https://test-cloud-labs.herokuapp.com/api/'
 };
