@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Usuario, UsuariosResponse } from '../interfaces/usuario.interface';
 import { Observable } from 'rxjs';
@@ -9,21 +9,35 @@ import { Observable } from 'rxjs';
 })
 export class UsuariosService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+    const token = localStorage.getItem('token');
+  }
 
   getUsuarios(page: number = 1): Observable<UsuariosResponse> {
-    return this.http.get<UsuariosResponse>(environment.baseUrl + 'usuarios' + '?page=' + page);
+    const url = environment.baseUrl + 'usuarios' + '?page=' + page;
+    const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
+    const httpOptions: Object = { headers, responseType: 'json' }
+    return this.http.get<UsuariosResponse>(url, httpOptions);
   }
 
   getUsuario(id: number): Observable<Usuario> {
-    return this.http.get<Usuario>(environment.baseUrl + 'usuarios/' + id);
+    const url = environment.baseUrl + 'usuarios/' + id;
+    const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
+    const httpOptions: Object = { headers, responseType: 'json' }
+    return this.http.get<Usuario>(url, httpOptions);
   }
 
   saveUsuario(usuario: Usuario): Observable<Usuario> {
-    return this.http.post<Usuario>(environment.baseUrl + 'usuarios', usuario);
+    const url = environment.baseUrl + 'usuarios';
+    const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
+    const httpOptions: Object = { headers, responseType: 'json' }
+    return this.http.post<Usuario>(url, usuario, httpOptions);
   }
 
   deleteUsuario(id: number): Observable<any> {
-    return this.http.delete<any>(environment.baseUrl + 'usuarios/' + id);
+    const url = environment.baseUrl + 'usuarios/' + id;
+    const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
+    const httpOptions: Object = { headers, responseType: 'json' }
+    return this.http.delete<any>(url, httpOptions);
   }
 }

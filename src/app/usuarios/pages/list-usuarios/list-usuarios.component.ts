@@ -21,6 +21,7 @@ export class ListUsuariosComponent implements OnInit {
   getUsuarios(page: number) {
     this.srvUsuarios.getUsuarios(page).subscribe({
       next: (usuarios: UsuariosResponse) => {
+        console.log(usuarios);
         this.usuarios = usuarios.usuarios
       },
       error: err => console.log(err),
