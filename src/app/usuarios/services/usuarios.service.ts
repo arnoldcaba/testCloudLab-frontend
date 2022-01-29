@@ -9,35 +9,33 @@ import { Observable } from 'rxjs';
 })
 export class UsuariosService {
 
+  get httpOptions(): Object {
+    const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
+    return { headers, responseType: 'json' }
+  }
+
+
   constructor(private http: HttpClient) { 
     const token = localStorage.getItem('token');
   }
 
   getUsuarios(page: number = 1): Observable<UsuariosResponse> {
     const url = environment.baseUrl + 'usuarios' + '?page=' + page;
-    const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
-    const httpOptions: Object = { headers, responseType: 'json' }
-    return this.http.get<UsuariosResponse>(url, httpOptions);
+    return this.http.get<UsuariosResponse>(url, this.httpOptions);
   }
 
   getUsuario(id: number): Observable<Usuario> {
     const url = environment.baseUrl + 'usuarios/' + id;
-    const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
-    const httpOptions: Object = { headers, responseType: 'json' }
-    return this.http.get<Usuario>(url, httpOptions);
+    return this.http.get<Usuario>(url, this.httpOptions);
   }
 
   saveUsuario(usuario: Usuario): Observable<Usuario> {
     const url = environment.baseUrl + 'usuarios';
-    const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
-    const httpOptions: Object = { headers, responseType: 'json' }
-    return this.http.post<Usuario>(url, usuario, httpOptions);
+    return this.http.post<Usuario>(url, usuario, this.httpOptions);
   }
 
   deleteUsuario(id: number): Observable<any> {
     const url = environment.baseUrl + 'usuarios/' + id;
-    const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
-    const httpOptions: Object = { headers, responseType: 'json' }
-    return this.http.delete<any>(url, httpOptions);
+    return this.http.delete<any>(url, this.httpOptions);
   }
 }

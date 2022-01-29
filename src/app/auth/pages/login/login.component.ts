@@ -10,15 +10,22 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
+  loading: boolean = false;
+
   constructor( private router: Router, private srvAuth: AuthService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
   }
 
   login () {
+    this.loading = true;
     this.srvAuth.login().subscribe({
-      next: () => this.router.navigate(['usuarios']),
+      next: () => {
+        this.loading = false;
+        this.router.navigate(['usuarios']);
+      },
       error: () => {
+        this.loading = false;
         this.toastr.error('Error en autenticación');
       }
     });

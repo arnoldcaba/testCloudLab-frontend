@@ -3,7 +3,7 @@
         <p-card class="text-center">
             <h1>Test registro de usuarios</h1>
             <p class="text-left my-5">Solo tienes que click en login para ingresar a la app! Esto seteara el token para proximos llamados.</p>
-            <button pButton type="button" label="login" style="width: 150px;" (click)="login()"></button>
+            <button pButton type="button" label="login" style="width: 150px;" (click)="login()" [loading]="loading"></button>
         </p-card>
     </div>
 </div>

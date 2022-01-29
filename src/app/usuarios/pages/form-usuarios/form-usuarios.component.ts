@@ -20,10 +20,10 @@ export class FormUsuariosComponent implements OnInit {
 
   formUsuario: FormGroup = this.fb.group({
     _id: [''],
-    usuario: ['', [Validators.required, Validators.minLength(3)]],
+    usuario: ['', [Validators.required, Validators.minLength(3), Validators.pattern('(?!.*[\.\-\_]{2,})^[a-zA-Z0-9\.\-\_]{3,24}$')]],
     nombre: ['', [Validators.required, Validators.minLength(3)]],
     apellido: ['', [Validators.required, Validators.minLength(3)]],
-    correo: ['', [Validators.required, Validators.email]],
+    correo: ['', [Validators.required, Validators.email]],  
   });
 
   constructor(
@@ -60,6 +60,7 @@ export class FormUsuariosComponent implements OnInit {
   }
 
   save() {
+    this.ajustarForm();
     console.log(this.formUsuario.value);
     if (this.formUsuario.valid) {
       console.log('Formulario valido');
@@ -99,11 +100,12 @@ export class FormUsuariosComponent implements OnInit {
   getErrorMsg (campo: string) {
     const errors = this.formUsuario.get(campo)?.errors
     if (errors) {
-      const { required, minlength, email, inuse } = errors;
+      const { required, minlength, email, inuse, pattern } = errors;
       if (required) return 'Campo requerido';
       if (minlength) return 'Minimo 3 caracteres';
       if (email) return 'Email incorrecto';
       if (inuse) return 'Ya se encuentra registrado';
+      if (pattern) return 'No cumple con el patron de usuario';
     }
     return '';
   }
@@ -128,6 +130,20 @@ export class FormUsuariosComponent implements OnInit {
       });
     }
   }
+
+  ajustarForm() {
+    this.formUsuario.patchValue({
+      usuario: this.normalize(this.formUsuario.get('usuario')!.value),
+      nombre: this.normalize(this.formUsuario.get('nombre')!.value),
+      apellido: this.normalize(this.formUsuario.get('apellido')!.value),
+      correo: this.normalize(this.formUsuario.get('correo')!.value)
+    });
+  }
+
+  normalize (value: string) {
+    return value.trim()?.toUpperCase();
+  }
+
 
   goback() {
     this.router.navigate(['/usuarios/list']);

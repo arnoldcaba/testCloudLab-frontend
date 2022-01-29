@@ -4,24 +4,24 @@
         <div class="formgrid grid">
             <div class="field col-6 sm:col-12 md:col-6">
                 <label for="usuario">Usuario</label>
-                <input id="usuario" type="text" pInputText class="inputfield w-full" formControlName="usuario">
+                <input id="usuario" type="text" pInputText class="inputfield w-full" formControlName="usuario" placeholder="Sin espacios">
                 <small id="username2-help" class="p-error" *ngIf="campoValido('usuario')">{{getErrorMsg('usuario')}}</small>
             </div>
             <div class="field col-6 sm:col-12 md:col-6">
                 <label for="nombre">Nombre</label>
-                <input id="nombre" type="text" pInputText class="inputfield w-full"  formControlName="nombre">
+                <input id="nombre" type="text" pInputText class="inputfield w-full"  formControlName="nombre" placeholder="Nombres">
                 <small id="username2-help" class="p-error" *ngIf="campoValido('nombre')">{{getErrorMsg('nombre')}}</small>
             </div>
         </div>
         <div class="formgrid grid">
             <div class="field col-6 sm:col-12 md:col-6">
                 <label for="apellido">Apellido</label>
-                <input id="apellido" type="text" pInputText class="inputfield w-full" formControlName="apellido">
+                <input id="apellido" type="text" pInputText class="inputfield w-full" formControlName="apellido" placeholder="Apellidos">
                 <small id="username2-help" class="p-error" *ngIf="campoValido('apellido')">{{getErrorMsg('apellido')}}</small>
             </div>
             <div class="field col-6 sm:col-12 md:col-6">
                 <label for="correo">Correo</label>
-                <input id="correo" type="text" pInputText class="inputfield w-full"  formControlName="correo">
+                <input id="correo" type="text" pInputText class="inputfield w-full"  formControlName="correo"  placeholder="micorreo@ejemplo.com">
                 <small id="username2-help" class="p-error" *ngIf="campoValido('correo')">{{getErrorMsg('correo')}}</small>
             </div>
         </div>
