@@ -20,7 +20,7 @@ export class FormUsuariosComponent implements OnInit {
 
   formUsuario: FormGroup = this.fb.group({
     _id: [''],
-    usuario: ['', [Validators.required, Validators.minLength(3), Validators.pattern('(?!.*[\.\-\_]{2,})^[a-zA-Z0-9\.\-\_]{3,24}$')]],
+    usuario: ['', [Validators.required, Validators.minLength(3), Validators.pattern(/^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/)]],
     nombre: ['', [Validators.required, Validators.minLength(3)]],
     apellido: ['', [Validators.required, Validators.minLength(3)]],
     correo: ['', [Validators.required, Validators.email]],  
@@ -136,7 +136,7 @@ export class FormUsuariosComponent implements OnInit {
       usuario: this.normalize(this.formUsuario.get('usuario')!.value),
       nombre: this.normalize(this.formUsuario.get('nombre')!.value),
       apellido: this.normalize(this.formUsuario.get('apellido')!.value),
-      correo: this.normalize(this.formUsuario.get('correo')!.value)
+      correo: this.formUsuario.get('correo')!.value.toLowerCase()
     });
   }
 

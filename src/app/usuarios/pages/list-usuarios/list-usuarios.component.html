@@ -21,10 +21,10 @@
         <ng-template pTemplate="body" let-usuario>
             <tr (click)="gotoDetail(usuario)" class="seleccionable">
                 <td>{{usuario._id}}</td>
-                <td>{{usuario.usuario | titlecase}}</td>
+                <td>{{usuario.usuario}}</td>
                 <td>{{usuario.nombre | titlecase}}</td>
                 <td>{{usuario.apellido | titlecase}}</td>
-                <td>{{usuario.correo | titlecase}}</td>
+                <td>{{usuario.correo}}</td>
             </tr>
         </ng-template>
     </p-table>
